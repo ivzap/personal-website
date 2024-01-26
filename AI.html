@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invader Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="gameCanvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const player = {
+        x: canvas.width / 2 - 25,
+        y: canvas.height - 50,
+        width: 50,
+        height: 50,
+        color: 'blue'
+    };
+
+    const invaders = [
+        { x: 50, y: 50, width: 30, height: 30, color: 'red', speed: 2 },
+        { x: 150, y: 50, width: 30, height: 30, color: 'red', speed: 2 },
+        { x: 250, y: 50, width: 30, height: 30, color: 'red', speed: 2 },
+    ];
+
+    function drawPlayer() {
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawInvaders() {
+        invaders.forEach(invader => {
+            ctx.fillStyle = invader.color;
+            ctx.fillRect(invader.x, invader.y, invader.width, invader.height);
+        });
+    }
+
+    function update() {
+        // Update player position based on mouse movement
+        canvas.addEventListener('mousemove', (e) => {
+            player.x = e.clientX - player.width / 2;
+        });
+
+        // Update invaders' positions
+        invaders.forEach(invader => {
+            invader.y += invader.speed;
+
+            // Check for collisions with the player
+            if (
+                player.x < invader.x + invader.width &&
+                player.x + player.width > invader.x &&
+                player.y < invader.y + invader.height &&
+                player.y + player.height > invader.y
+            ) {
+                // Collision detected - game over logic (you can customize this part)
+                alert('Game Over! Refresh the page to play again.');
+            }
+
+            // Reset invader position if it goes off the screen
+            if (invader.y > canvas.height) {
+                invader.y = 0;
+            }
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPlayer();
+        drawInvaders();
+    }
+
+    function gameLoop() {
+        update();
+        draw();
+        requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+</script>
+
+</body>
+</html>

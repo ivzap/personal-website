@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.solar-system {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
+
+.sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-color: #ffcc00;
+    border-radius: 50%;
+}
+
+.planet {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: rotatePlanet linear infinite;
+}
+
+.mercury {
+    background: url('path/to/mercury-logo.png') no-repeat center center;
+    background-size: contain;
+    animation: orbitMercury linear infinite;
+}
+
+.venus {
+    background: url('path/to/venus-logo.png') no-repeat center center;
+    background-size: contain;
+    animation: orbitVenus linear infinite;
+}
+
+.earth {
+    background: url('path/to/earth-logo.png') no-repeat center center;
+    background-size: contain;
+    animation: orbitEarth linear infinite;
+}
+
+.mars {
+    background: url('path/to/mars-logo.png') no-repeat center center;
+    background-size: contain;
+    animation: orbitMars linear infinite;
+}
+
+/* Define orbit animations for each planet */
+@keyframes rotatePlanet {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes orbitMercury {
+    from {
+        transform: rotate(0deg) translateX(80px) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(80px) rotate(-360deg);
+    }
+}
+
+@keyframes orbitVenus {
+    from {
+        transform: rotate(0deg) translateX(120px) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(120px) rotate(-360deg);
+    }
+}
+
+@keyframes orbitEarth {
+    from {
+        transform: rotate(0deg) translateX(160px) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(160px) rotate(-360deg);
+    }
+}
+
+@keyframes orbitMars {
+    from {
+        transform: rotate(0deg) translateX(200px) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(200px) rotate(-360deg);
+    }
+}
+
